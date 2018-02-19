@@ -17,6 +17,7 @@
     <maven-archetype-plugin.version>3.0.1</maven-archetype-plugin.version>
     
     <groovy.version>2.4.13</groovy.version>
+    <slf4j.version>1.7.25</slf4j.version>
   </properties>
 
   <dependencies>
@@ -24,6 +25,12 @@
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy-all</artifactId>
       <version>${groovy.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
@@ -48,6 +55,11 @@
               <groupId>org.codehaus.groovy</groupId>
               <artifactId>groovy-all</artifactId>
               <version>${groovy.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.slf4j</groupId>
+              <artifactId>slf4j-api</artifactId>
+              <version>${slf4j.version}</version>
             </dependency>
           </dependencies>
         </plugin>

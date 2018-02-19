@@ -5,16 +5,20 @@ import java.nio.file.Paths
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
+def log = LoggerFactory.getLogger('org.apache.camel.archetype')
 
 
-println "Downloading Swagger API from ${request.properties['swaggerApiUrl']}..."
+log.info "Downloading Swagger API from ${request.properties['swaggerApiUrl']}..."
 
 def url = new URL(request.properties['swaggerApiUrl'])
 def apiText = url.text
 
 
 
-println "Writing Swagger API definition to swagger-api.json file..."
+log.info "Writing Swagger API definition to swagger-api.json file..."
 
 def fileDir = Paths.get(request.outputDirectory, request.artifactId, 'src/main/swagger').toFile()
 def fileName = 'swagger-api.json'
@@ -24,7 +28,7 @@ file.setText(JsonOutput.prettyPrint(apiText))
 
 
 
-println "Parsing Swagger API definition..."
+log.info "Parsing Swagger API definition..."
 
 def jsonSlurper = new JsonSlurper()
 def apiMap = jsonSlurper.parseText(apiText)
@@ -38,10 +42,20 @@ def apiDescription = apiMap?.info?.description
 def apiContact = apiMap?.info?.contact?.email
 
 def apiNames = apiMap?.tags*.name
+if (!apiNames || apiNames?.empty) {
+  apiNames = apiMap?.paths*.value.collectMany() { path ->
+    path*.value.collectMany() { verb -> 
+      verb?.tags?:[]
+    } 
+  } as Set
+}
+if (!apiNames || apiNames?.empty) {
+  apiNames = ['default']
+}
 
 
 
-println "Modifying application.yml file..."
+log.info "Modifying application.yml file..."
 
 def quoteYamlString(def yamlString) {
   return (yamlString) ? "'${yamlString.replaceAll('\'', '\'\'')}'" : null
@@ -61,7 +75,7 @@ applicationYmlFile.setText(applicationYamlText)
 
 
 
-println "Modifying CamelConfiguration.java file..."
+log.info "Modifying CamelConfiguration.java file..."
 
 def apiClassNames = apiNames.collect() { name ->
   name = "${request.properties['package']}.api.${name.capitalize()}Api"
