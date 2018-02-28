@@ -11,22 +11,22 @@
       <defaultValue>1.0.0-SNAPSHOT</defaultValue>
     </requiredProperty>
     <requiredProperty key="package"/>
-    <requiredProperty key="swaggerCodegenMavenPluginVersion">
+    <requiredProperty key="swagger-codegen-maven-plugin-version">
       <defaultValue>2.3.1</defaultValue>
     </requiredProperty>
-    <requiredProperty key="camelVersion">
+    <requiredProperty key="camel-version">
       <defaultValue>2.18.1</defaultValue>
     </requiredProperty>
-    <requiredProperty key="cxfVersion">
+    <requiredProperty key="cxf-version">
       <defaultValue>3.1.8</defaultValue>
     </requiredProperty>
-    <requiredProperty key="springBootVersion">
+    <requiredProperty key="spring-boot-version">
       <defaultValue>1.4.1.RELEASE</defaultValue>
     </requiredProperty>
-    <requiredProperty key="swaggerJaxrsVersion">
+    <requiredProperty key="swagger-jaxrs-version">
       <defaultValue>1.5.18</defaultValue>
     </requiredProperty>
-    <requiredProperty key="swaggerApiUrl"/>
+    <requiredProperty key="swagger-api-url"/>
   </requiredProperties>
   
   <fileSets>

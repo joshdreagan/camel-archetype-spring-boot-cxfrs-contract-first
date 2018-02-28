@@ -9,12 +9,13 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 def log = LoggerFactory.getLogger('org.apache.camel.archetype')
+def encoding = 'UTF-8'
 
 
-log.info "Downloading Swagger API from ${request.properties['swaggerApiUrl']}..."
+log.info "Downloading Swagger API from ${request.properties['swagger-api-url']}..."
 
-def url = new URL(request.properties['swaggerApiUrl'])
-def apiText = url.text
+def url = new URL(request.properties['swagger-api-url'])
+def apiText = url.getText(encoding)
 
 
 
@@ -24,7 +25,7 @@ def fileDir = Paths.get(request.outputDirectory, request.artifactId, 'src/main/s
 def fileName = 'swagger-api.json'
 def file = new File(fileDir, fileName)
 fileDir.mkdirs();
-file.setText(JsonOutput.prettyPrint(apiText))
+file.setText(JsonOutput.prettyPrint(apiText), encoding)
 
 
 
@@ -71,7 +72,7 @@ applicationYamlText = applicationYamlText.replaceAll('__API_TERMS_OF_SERVICE_URL
 applicationYamlText = applicationYamlText.replaceAll('__API_VERSION__', quoteYamlString(apiVersion)?:'')
 applicationYamlText = applicationYamlText.replaceAll('__API_DESCRIPTION__', quoteYamlString(apiDescription)?:'')
 applicationYamlText = applicationYamlText.replaceAll('__API_CONTACT__', quoteYamlString(apiContact)?:'')
-applicationYmlFile.setText(applicationYamlText)
+applicationYmlFile.setText(applicationYamlText, encoding)
 
 
 
@@ -84,4 +85,4 @@ def camelConfigurationJavaFile = Paths.get(request.outputDirectory, request.arti
 def camelConfigurationJavaText = camelConfigurationJavaFile.text
 camelConfigurationJavaText = camelConfigurationJavaText.replaceAll('__API_NAME__', apiTitle?:'Application')
 camelConfigurationJavaText = camelConfigurationJavaText.replaceAll('__API_CLASSES__', apiClassNames.join(','))
-camelConfigurationJavaFile.setText(camelConfigurationJavaText)
+camelConfigurationJavaFile.setText(camelConfigurationJavaText, encoding)

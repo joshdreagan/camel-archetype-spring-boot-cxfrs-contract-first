@@ -1,3 +1,4 @@
+#set($dollar = '$')
 # Servlet Container & Health Setup
 server:
   address: 0.0.0.0
@@ -28,7 +29,7 @@ logging:
 api:
   base-path: /camel
   swagger:
-    base-path: ${cxf.path}/${api.base-path}
+    base-path: ${dollar}{cxf.path}/${dollar}{api.base-path}
     license: __API_LICENSE__
     license-url: __API_LICENSE_URL__
     title: __API_TITLE__

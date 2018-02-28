@@ -1,3 +1,4 @@
+#set($dollar = '$')
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -18,12 +19,12 @@
     <maven.compiler.source>8</maven.compiler.source>
     <maven.compiler.target>8</maven.compiler.target>
     
-    <swagger-codegen-maven-plugin.version>${swaggerCodegenMavenPluginVersion}</swagger-codegen-maven-plugin.version>
+    <swagger-codegen-maven-plugin.version>${swagger-codegen-maven-plugin-version}</swagger-codegen-maven-plugin.version>
 
-    <camel.version>${camelVersion}</camel.version>
-    <cxf.version>${cxfVersion}</cxf.version>
-    <spring-boot.version>${springBootVersion}</spring-boot.version>
-    <swagger-jaxrs.version>${swaggerJaxrsVersion}</swagger-jaxrs.version>
+    <camel.version>${camel-version}</camel.version>
+    <cxf.version>${cxf-version}</cxf.version>
+    <spring-boot.version>${spring-boot-version}</spring-boot.version>
+    <swagger-jaxrs.version>${swagger-jaxrs-version}</swagger-jaxrs.version>
   </properties>
 
   <dependencyManagement>
@@ -31,14 +32,14 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring-boot.version}</version>
+        <version>${dollar}{spring-boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-spring-boot-dependencies</artifactId>
-        <version>${camel.version}</version>
+        <version>${dollar}{camel.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -75,17 +76,17 @@
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
-      <version>${cxf.version}</version>
+      <version>${dollar}{cxf.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
-      <version>${cxf.version}</version>
+      <version>${dollar}{cxf.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-rs-security-cors</artifactId>
-      <version>${cxf.version}</version>
+      <version>${dollar}{cxf.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
@@ -98,7 +99,7 @@
     <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-jaxrs</artifactId>
-      <version>${swagger-jaxrs.version}</version>
+      <version>${dollar}{swagger-jaxrs.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -109,7 +110,7 @@
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-rs-service-description</artifactId>
-      <version>${cxf.version}</version>
+      <version>${dollar}{cxf.version}</version>
       <optional>true</optional>
     </dependency>
   </dependencies>
@@ -119,7 +120,7 @@
       <plugin>
         <groupId>io.swagger</groupId>
         <artifactId>swagger-codegen-maven-plugin</artifactId>
-        <version>${swagger-codegen-maven-plugin.version}</version>
+        <version>${dollar}{swagger-codegen-maven-plugin.version}</version>
         <executions>
           <execution>
             <id>generate-sources</id>
@@ -132,7 +133,7 @@
               <generateSupportingFiles>false</generateSupportingFiles>
               <modelPackage>${package}.model</modelPackage>
               <apiPackage>${package}.api</apiPackage>
-              <output>${project.build.directory}/generated-sources</output>
+              <output>${dollar}{project.build.directory}/generated-sources</output>
               <generateApiTests>false</generateApiTests>
               <configOptions>
                 <sourceFolder>swagger</sourceFolder>
@@ -157,7 +158,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${spring-boot.version}</version>
+        <version>${dollar}{spring-boot.version}</version>
         <executions>
           <execution>
             <goals>
