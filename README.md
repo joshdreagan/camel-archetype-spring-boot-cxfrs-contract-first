@@ -17,5 +17,6 @@ $ mvn archetype:generate -DarchetypeCatalog=local \
                          -DgroupId=<PROJECT_GROUP_ID> \
                          -DartifactId=<PROJECT_ARTIFACT_ID> \
                          -Dversion=<PROJECT_VERSION> \
-                         -Dpackage=<PROJECT_PACKAGE>
+                         -Dpackage=<PROJECT_PACKAGE> \
+                         -Dswagger-api-url=<SWAGGER_API_URL>
 ```
