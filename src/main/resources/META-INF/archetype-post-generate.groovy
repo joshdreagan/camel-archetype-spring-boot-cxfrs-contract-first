@@ -81,7 +81,7 @@ log.info "Modifying CamelConfiguration.java file..."
 def apiClassNames = apiNames.collect() { name ->
   name = "${request.properties['package']}.api.${name.capitalize()}Api"
 }
-def camelConfigurationJavaFile = Paths.get(request.outputDirectory, request.artifactId, 'src/main/java', request.properties['package'].replaceAll('\\.', File.separator), 'CamelConfiguration.java').toFile()
+def camelConfigurationJavaFile = Paths.get(request.outputDirectory, ([request.artifactId, 'src', 'main', 'java'] + request.properties['package'].split('\\.') + ['CamelConfiguration.java']).flatten() as String[]).toFile()
 def camelConfigurationJavaText = camelConfigurationJavaFile.text
 camelConfigurationJavaText = camelConfigurationJavaText.replaceAll('__API_NAME__', apiTitle?:'Application')
 camelConfigurationJavaText = camelConfigurationJavaText.replaceAll('__API_CLASSES__', apiClassNames.join(','))

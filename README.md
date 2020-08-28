@@ -20,3 +20,5 @@ $ mvn archetype:generate -DarchetypeCatalog=local \
                          -Dpackage=<PROJECT_PACKAGE> \
                          -Dswagger-api-url=<SWAGGER_API_URL>
 ```
+
+__Note: It seems that a [bug](https://issues.apache.org/jira/projects/ARCHETYPE/issues/ARCHETYPE-565) was introduced in the Maven Archetype Plugin in version 3.1.0 that breaks this project. So until a fix is released, you'll need to provide the fully qualified plugin name and version for the above command (ie, `mvn org.apache.maven.plugins:maven-archetype-plugin:3.0.1:generate ...`).__
