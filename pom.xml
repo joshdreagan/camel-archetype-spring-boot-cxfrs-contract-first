@@ -16,7 +16,7 @@
   <properties>
     <maven-archetype-plugin.version>3.0.1</maven-archetype-plugin.version>
     
-    <groovy.version>2.4.13</groovy.version>
+    <groovy.version>2.4.21</groovy.version>
     <slf4j.version>1.7.25</slf4j.version>
   </properties>
 
